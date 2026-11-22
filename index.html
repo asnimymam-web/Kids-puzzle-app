@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Puzzle Pop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1><span class="logo">🧩</span> Puzzle Pop</h1>
+  <div class="progress" aria-live="polite">
+    <div class="track"><div id="bar"></div></div>
+    <span id="count">0 / 0</span>
+  </div>
+  <button id="sound" class="icon" title="Sound on/off" aria-label="Toggle sound">🔊</button>
+</header>
+
+<main>
+  <aside class="panel">
+    <section>
+      <h2><b>1</b> Pick what to build</h2>
+      <div class="tabs" role="tablist">
+        <button class="tab on" data-tab="animals">🐾 Animals</button>
+        <button class="tab" data-tab="shapes">⭐ Shapes</button>
+        <button class="tab" data-tab="picture">🖼️ My picture</button>
+      </div>
+      <div id="tab-animals" class="tabpane"><div id="animals" class="shapes"></div></div>
+      <div id="tab-shapes" class="tabpane" hidden>
+        <div id="shapes" class="shapes"></div>
+        <button id="surprise" class="wide">🎲 Surprise me!</button>
+      </div>
+      <div id="tab-picture" class="tabpane" hidden>
+        <label class="wide upload">📷 Choose a picture…
+          <input id="file" type="file" accept="image/*" hidden>
+        </label>
+        <div class="seg">
+          <label><input type="radio" name="imgmode" value="whole" checked> Whole picture</label>
+          <label><input type="radio" name="imgmode" value="cutout"> Cut out the subject</label>
+        </div>
+        <label class="slider" id="tolWrap" hidden>
+          <input id="tol" type="range" min="10" max="140" value="48" aria-label="Background removal strength">
+          <span class="hint">Background removal strength</span>
+        </label>
+        <p class="hint">Cut-out works best on a picture with a plain background, or a PNG with a transparent background.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><b>2</b> How tricky?</h2>
+      <div id="levels" class="levels">
+        <button data-n="3" class="lvl">🐣 Easy</button>
+        <button data-n="5" class="lvl">🐥 Medium</button>
+        <button data-n="8" class="lvl">🦊 Hard</button>
+        <button data-n="12" class="lvl">🐉 Expert</button>
+      </div>
+      <label class="slider">
+        <input id="slider" type="range" min="2" max="14" step="1" value="5" aria-label="Pieces along the longest side">
+        <span id="levelLabel"></span>
+      </label>
+    </section>
+
+    <section>
+      <h2><b>3</b> Colors</h2>
+      <div id="palettes" class="palettes"></div>
+    </section>
+
+    <section class="export">
+      <h2><b>4</b> 3D print (STL)</h2>
+      <div class="grid2">
+        <label>Size (mm)<input id="mmSize" type="number" min="30" max="400" value="120"></label>
+        <label>Thickness (mm)<input id="mmThick" type="number" min="1" max="20" step="0.5" value="4"></label>
+        <label>Gap between pieces (mm)<input id="mmGap" type="number" min="0" max="2" step="0.05" value="0.4"></label>
+        <label>Layout<select id="layout"><option value="together">Assembled</option><option value="spread">Spread out</option></select></label>
+      </div>
+      <p id="exportNote" class="hint"></p>
+      <button id="exportBtn" class="wide primary">⬇ Download STL</button>
+    </section>
+
+    <section class="actions">
+      <button id="again" class="wide primary">🔄 New pieces</button>
+      <button id="shuffle" class="wide">🔀 Shuffle tray</button>
+      <button id="hint" class="wide" aria-pressed="false">💡 Show picture hint</button>
+    </section>
+  </aside>
+
+  <div id="stage" aria-label="Puzzle play area"></div>
+</main>
+
+<div id="win" class="win" hidden>
+  <div class="card">
+    <div class="big">🎉</div>
+    <h2>You did it!</h2>
+    <p id="winText"></p>
+    <div class="row">
+      <button id="winAgain" class="primary">Play again</button>
+      <button id="winHarder">Try harder ➜</button>
+    </div>
+  </div>
+</div>
+
+<script src="geometry.js"></script>
+<script src="animals.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
